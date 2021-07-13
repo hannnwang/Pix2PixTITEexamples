@@ -1,0 +1,36 @@
+#!/bin/bash
+#SBATCH --array=1-1%1   # NJOBS is the number of jobs in the chain
+#SBATCH --account=def-ngrisoua 
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=15G
+#SBATCH --time=0-2:00:00  # DD-HH:MM:SS
+#SBATCH --mail-user=hannn.wang@utoronto.ca
+#SBATCH --mail-type=ALL
+
+#Run this with: sbatch --job-name=compare_runs_similarity post_compare_runs_similarity.slrm
+
+OUTDIR=/scratch/hannn/pix2pix-for-swot/$SLURM_JOB_NAME   #***scratch changed to the temporary one. valid until MAR.20
+CODEDIR=/home/hannn/pix2pix-for-swot/p2p_tf2_hw
+
+
+module load python/3.8 #Changed to 3.8
+module load scipy-stack
+tfenvdir=/home/hannn/pix2pix-for-swot/tfV2envre
+virtualenv --no-download $SLURM_TMPDIR/env
+source $SLURM_TMPDIR/env/bin/activate
+
+pip install --no-index tensorflow_gpu matplotlib numpy pandas netcdf4
+
+
+cd $SLURM_TMPDIR
+for LAMBDA in 1000; do
+	for testname in wp75_t_23_3; do
+			#input_path='/scratch/hannn/pix2pix-for-swot/lambda_'$LAMBDA'_nlayers_3_testing_'$testname'_700epochs_w_rotflipud/'
+			#input_path='/scratch/hannn/pix2pix-for-swot/lambda_'$LAMBDA'_nlayers_5_testing_'$testname'_700epochs_w_rotflipud/'
+			input_path='/scratch/hannn/pix2pix-for-swot/lambda_1000_nlayers_5_kitchen_sink_700epochs_w_rotflipud/'
+			python $CODEDIR/restore_checkpoint_and_validation.py \
+				--input_dir $input_path 
+	done
+done
+
+exit
