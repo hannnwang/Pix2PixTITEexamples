@@ -9,7 +9,7 @@ master.bash should be used with arguments. Complete list:
     -c   Colormap for the cosine-fitted (wave) SSH (you shouldn't change this.)
     -e   Total number of epochs for training
     -m   Memory for each job
-    -d   How many jobs to run in order to cover the total number of epochs. Ideally mod(e/d)=0 
+    -d   How many jobs to run in order to cover the total number of epochs. Ideally mod(e/d)=0. These jobs are run one after the other. Main reason to divide into more jobs is that it's usually easier to request smaller chunks of resources. 
     -s   How many seconds each epoch takes  
 	-l   Parameter Lambda controling the L1 loss as shown in paper
 	-n   number of layers in the discriminator. Setting n=3 corresponds to the "patchGAN" with a patch size of 75, as shown in Isola et al. Setting n=5 corresponds to the "imageGAN", from which the discriminator treats the whole image at once. 
@@ -46,7 +46,7 @@ n_epochs=${n_epochs:-1000} #Default: 1000 epochs in total(probably too much)
 n_mem=${n_mem:-70} #Default: 70 GB memory request for each job (probably too much)
 divide=${divide:-1} ##Default: job division is 1. 
 epoch_sec=${epoch_sec:-75}
-LAMBDA=${LAMBDA:-100} #Default: 100, as explained in paper.
+LAMBDA=${LAMBDA:-1000} #Default: 1000, as explained in paper.
 n_layers=${n_layers:-3}
 
 cat <<EOF

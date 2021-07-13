@@ -418,7 +418,8 @@ def fit(train_ds, epochs, test_ds,mem_cost_list,i_checkpoint):
     print()
 
     #saving (checkpoint) the model every few epochs
-    if (epoch + 1) % 10 == 0: #Saving every 10 epochs; you can modify this if you want to save more/less frequently.
+    epochsave=10 #Saving every 10 epochs; you can modify this if you want to save more/less frequently.
+    if (epoch + 1) % epochsave == 0: 
       checkpoint.save(file_prefix = checkpoint_prefix)
     print ('Time taken for epoch {} is {} sec\n'.format(epoch + 1,
                                                         time.time()-start))
