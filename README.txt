@@ -1,3 +1,5 @@
+If you only want to take a quick look at how the architecture of the GAN looks like, you only need to read pix2pix_TF2_hw_train_scalar.py. Details of design considerations are included in the paper. If you are interested in running the program yourselves, see the instructions below. The instructions may be cumbersome, but most of them are describing how to store or divide data so that the paths would match the paths specified in the programs.  
+
 The instructions are written with the Graham cluster (https://docs.computecanada.ca/wiki/Graham) at Compute Canada in mind. Virtual environments are heavily used; if your clusters don't need that, the codes (i.e. anywhere you can see "virtualenv" or "$SLURM_TMPDIR")may be changed accordingly. 
 
 a.)Prior to running, the .nc files downloaded from https://dataverse.scholarsportal.info/dataset.xhtml?persistentId=doi:10.5683/SP2/HU58SG need to be pre-procceed. Follow these steps:
@@ -30,6 +32,8 @@ For example say you want to look at the 600th epoch and the corresponding checkp
 Check if the parameters BATCH_SIZE, N_LAYERS and so on in restore_and_plot_ckpt_local.py are the same as the ones you have used.
 5. Create a folder titled "test" under mpath. Choose a few testing instances you want to look at from your remote folder outdir/test/.  The naming of these numpy files are similar as the ones described in step a/4. 
 You don't have to copy all the test files; for a first test, you are recommend to only copy about 3 files. 
-6. Run restore_and_plot_ckpt_local.py. By default, it should a figure (4 panels) for each test instance you have copied.  
+6. Run restore_and_plot_ckpt_local.py. By default, it should a figure (4 panels) for each test instance under your test folder. If you don't want so many figures, or only want specific test instances, you can modify the codes yourself.  
+
+If you would like to try more analytics on the results, you can apply most parts of the codes above to restore the checkpoints and generate images, and write your own codes to compute correlations and so on. I did not upload my codes on those because there are too many of them, and I believe the computations are all standard, and described in details in the paper (or supporting information.)
 
 d.) For the ES1-5 runs, the steps are similar, but running "master_scalar.bash" instead. I'm yet to caption it.
