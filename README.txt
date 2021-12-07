@@ -15,6 +15,7 @@ Note that these are just printouts; the inputs and outputs for pix2pix are not p
 Now, you can go on to run the pix2pix!
 b.)For the "kitchensink" run, where the test images are randomly selected from all the S1-5 snapshots:
 1.In "master_scalar_kitchensink.bash", you need to replace several folders in "master_scalar_kitchensink.bash". "tfenvdir" is the directory for your virtual environment. "picpath" should be the "datapath/ifremer-pics_scalar" path you created in step a/1-4 . "codedir" should be your code folder where you have copied all the codes in step a/2. "outdir" should be the folder where you store the outcomes. Note that it needs to be big enough.
+Similarly, you need to replace the folder names and the slurm options (e.g. account, email address) in lanceur.slrm.
 2. Now run "master_scalar_kitchensink.bash". This bash file can not be run on log-in mode either, due to the slightly cumbersome pairing of input and output images. I run it with salloc --cpus-per-task=16 --mem=16G --time=00:30:00.
 Note the multiple options you can specify when running it. They mostly correspond to how you want to allocate the computational resources, as explained in the bash file. To get the results in paper, I run: 
 bash master_scalar_kitchensink.bash -e 700 -m 40 -d 10 -s 113 -l 1000 -n 5
