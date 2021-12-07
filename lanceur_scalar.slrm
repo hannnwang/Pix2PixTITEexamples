@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=MEMOG
 #SBATCH --time=0-ZXZX:00  # DD-HH:MM:SS
-#SBATCH --mail-user=hannn.wang@utoronto.ca
+#SBATCH --mail-user=yadayadaydada@yadayada.com
 #SBATCH --mail-type=ALL
 
 OUTDIR=/scratch/hannn/pix2pix-for-swot/$SLURM_JOB_NAME   
